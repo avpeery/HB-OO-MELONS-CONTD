@@ -3,9 +3,10 @@
 class AbstractMelonOrder():
     """An abstract base class that other Melon Orders inherit from."""
 
-    def __init__ (self, species, qty): 
+    def __init__ (self, species, qty, shipped=False): 
         self.species = species 
-        self.qty = qty 
+        self.qty = qty
+        self.shipped = shipped
 
 
     def get_total(self):
@@ -25,21 +26,18 @@ class AbstractMelonOrder():
 class DomesticMelonOrder(AbstractMelonOrder):
     """A melon order within the USA."""
 
-    shipped = False
     order_type = "domestic"
     tax = 0.08
 
 
 class InternationalMelonOrder(AbstractMelonOrder):
-"""An international (non-US) melon order."""
-        
-    shipped = False
+    """An international (non-US) melon order."""
+
     order_type = "international"
     tax = 0.17
 
-
-    def__init__(self, country code):
-        super().def__init__(self)
+    def __init__(self, species, qty, country_code):
+        super().__init__(species, qty)
         self.country_code = country_code
 
 
