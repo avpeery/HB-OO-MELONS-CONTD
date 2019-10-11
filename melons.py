@@ -18,6 +18,9 @@ class AbstractMelonOrder():
         
         total = (1 + self.tax) * self.qty * base_price 
 
+        if type(self) == "InternationalMelonOrder" and self.qty < 10:
+            total = total +3
+
         return total
 
 
@@ -44,16 +47,6 @@ class InternationalMelonOrder(AbstractMelonOrder):
     def __init__(self, species, qty, country_code):
         super().__init__(species, qty)
         self.country_code = country_code
-
-
-    def get_additional_fee(self, qty):
-        
-        if qty < 10: 
-            flat_fee = 3
-        else:
-            flat_fee = 0
-
-        return flat_fee
 
 
     def get_country_code(self):
